@@ -1,0 +1,117 @@
+// Defaults which you can freely override
+$column-width: 60px !default;
+$gutter-width: 20px !default;
+$columns: 12 !default;
+$grid-debug: false !default;
+
+/* The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/  */
+@mixin clearfix() {
+	*zoom:1;
+
+	&:before,
+	&:after {
+	    content:"";
+	    display:table;
+	}
+	&:after {
+	    clear:both;
+	}
+}
+
+/*//////////
+// GRID //
+//////////*/
+
+@mixin grid-width() {
+	width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
+	html.flexbox & {
+		width: auto;
+		max-width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
+	}
+}
+
+@mixin row($x:$columns) {
+
+	/* the visual width of the row */
+	$row_width: ($column-width * $x) + (($x - 1) * $gutter-width);
+
+	/* the row_width + the margins */
+	$width: $row_width + $gutter-width;
+
+	/* the margins on the outside */
+	$margin: $gutter-width / 2 * -1;
+
+	margin-left: $margin;
+	margin-right: $margin;
+
+	/* default, no flexbox styles */
+	display: inline-block;
+	width: $width;
+
+	/* only for when we have flexbox */
+	html.flexbox & {
+		width: auto;
+		@include display-box;
+		@include box-orient(horizontal);
+		@include box-align(stretch);
+	}
+
+	@if $grid-debug {
+		@debug "ROW";
+		@debug "row_width: #{$row_width}";
+		@debug "width: #{$width}";
+		@debug "margin: #{$margin}";
+	}
+
+}
+
+
+@mixin column($x, $row_columns:$columns) {
+
+	$width: ($x * $column-width) + (($x - 1) * $gutter-width);
+	$margin: $gutter-width/2;
+
+	width: $width;
+	margin-left: $margin;
+	margin-right: $margin;
+
+	/* default, no flexbox styles */
+	display: inline;
+	float: left;
+
+
+	/* only for when we have flexbox */
+	html.flexbox & {
+		display: block;
+		float: none;
+		@include box-flex($x * $row_columns);
+	}
+
+	@if $grid-debug {
+		@debug "COLUMN";
+		@debug "width: #{$width}";
+		@debug "margin: #{$margin}";
+	}
+
+}
+
+@mixin offset($x:1, $row_columns:$columns) {
+
+	$margin: ($x * $column-width) + (($x + .5) * $gutter-width);
+	margin-left: $margin;
+	@if $grid-debug {
+		@debug "OFFSET";
+		@debug "margin-left: #{$margin}";
+	}
+}
+
+@mixin prepend($x:1, $row_columns:$columns) {
+
+	$margin: ($x * $column-width) + (($x + .5) * $gutter-width);
+	margin-right: $margin;
+	@if $grid-debug {
+		@debug "PREPEND";
+		@debug "margin-right: #{$margin}";
+	}
+}
+
