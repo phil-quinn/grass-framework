@@ -7,5 +7,11 @@ images_dir = "images"
 javascripts_dir = "javascripts"
 # To enable relative paths to assets via compass helper functions. Uncomment:
 relative_assets = true
-output_style = :nested
-sass_options = {:debug_info => true}
+
+# use these for degugging
+# output_style = :nested
+# sass_options = {:debug_info => true}
+
+# use these for production
+output_style = :compressed
+sass_options = {:debug_info => false}
