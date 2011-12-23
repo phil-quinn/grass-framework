@@ -8,11 +8,25 @@ body {
 	padding: 10px;
 	@include blueprint-typography-body(12px);
 	@include blueprint-typography-defaults;
-	#{headings(all)} { margin-top: 1em; }
-
-	.col {
-		background-color: #ccc;
-		margin-top: 10px;
+	#{headings(all)} { margin: 1em 0 0 10px; }
+	background-color: #666;
+	.container {
+		background-color: #fff;
+		overflow: hidden;
+		.col {
+			background-color: #ddd;
+			margin-top: 10px;
+			text-align: center;
+			.col {
+				background-color: #ccc;
+				.col {
+					background-color: #bbb;
+					.col {
+						background-color: #aaa;
+					}
+				}
+			}
+		}
 	}
 }
 

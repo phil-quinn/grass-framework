@@ -22,19 +22,85 @@
 	<link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)" href="css/2x.css">
 	<!-- just IE 8 and earlier, since they can't do media queries -->
 	<!--[if lte IE 8]>
-	<link rel="stylesheet" media="" href="$ThemedCSSLink(ie)">
+	<link rel="stylesheet" media="" href="css/ie.css">
 	<![endif]-->
 
-
+	<!-- we need modernizr to detect if we can use flexbox -->
 	<script src="javascript/modernizr-2.0.6.min.js"></script>
+
+	<!-- we need jquery for selectivizr (and becuse it's cool) -->
 	<script src="javascript/jquery-1.7.1.min.js"></script>
-	<script src="javascript/selectivizr-min.js"></script>
-	<script src="javascript/flexie.min.js"></script>
+
+	<!-- selectivizr lets old IEs work better with css psuedo classes like first-child -->
+	<!--[if (gte IE 6)&(lte IE 9)]>
+		<script src="javascript/selectivizr-min.js"></script>
+	<![endif]-->
+
 </head>
 <body>
 <div class="container">
-	<h1>Normal Columns</h1>
+	<div id="nested-columns">
+		<div class="col">
+			<h1>Nested Example 1</h1>
+			<div class="row" id="nested-row-1">
+				<div class="col">
+					first column
+					<div class="row">
+						<div class="col">subcolumn</div>
+						<div class="col">subcolumn</div>
+					</div>
+				</div>
+				<div class="col">
+					second column
+					<div class="row">
+						<div class="col">subcolumn</div>
+						<div class="col">subcolumn</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<h1>Nested Example 2</h1>
+			<div class="row" id="nested-row-2">
+				<div class="col column1">
+					first column
+					<div class="row">
+						<div class="col">subcolumn</div>
+						<div class="col">subcolumn</div>
+					</div>
+				</div>
+				<div class="col column2">
+					second column
+					<div class="row">
+						<div class="col">subcolumn</div>
+						<div class="col">
+							subcolumn
+							<div class="row">
+								<div class="col">subsubcolumn</div>
+								<div class="col">subsubcolumn</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h1>Test Columns</h1>
 	<div id="normal-columns">
+		<div class="row">
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+			<div class="col cols-1">cols-1</div>
+		</div>
 		<div class="row">
 			<div class="col cols-1">cols-1</div>
 			<div class="col cols-11">cols-11</div>
@@ -101,99 +167,6 @@
 			<div class="col cols-2">cols-2</div>
 			<div class="col cols-2">cols-2</div>
 		</div>
-	</div>
-	<h1>Nested Example 1</h1>
-	<div class="row" id="nested-example-1">
-		<div class="col">
-			first column
-			<div class="row">
-				<div class="col">subcolumn</div>
-				<div class="col">subcolumn</div>
-			</div>
-		</div>
-		<div class="col">
-			second column
-			<div class="row">
-				<div class="col">subcolumn</div>
-				<div class="col">subcolumn</div>
-			</div>
-		</div>
-	</div>
-
-	<h1>Nested Example 2</h1>
-	<div class="row" id="nested-example-2">
-		<div class="col column1">
-			first column
-			<div class="row">
-				<div class="col">subcolumn</div>
-				<div class="col">subcolumn</div>
-			</div>
-		</div>
-		<div class="col column2">
-			second column
-			<div class="row">
-				<div class="col">subcolumn</div>
-				<div class="col">
-					subcolumn
-					<div class="row">
-						<div class="col">subsubcolumn</div>
-						<div class="col">subsubcolumn</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<h1>Offset</h1>
-	<div class="row">
-		<div class="col cols-1">cols-1</div>
-		<div class="col cols-10  offset-1">cols-10  offset-1</div>
-	</div>
-	<div class="row">
-		<div class="col cols-1">cols-1</div>
-		<div class="col cols-9  offset-2">cols-9  offset-2</div>
-	</div>
-	<div class="row">
-		<div class="col cols-1">cols-1</div>
-		<div class="col cols-8  offset-3">cols-8  offset-3</div>
-	</div>
-	<div class="row">
-		<div class="col cols-1">cols-1</div>
-		<div class="col cols-7  offset-4">cols-7  offset-4</div>
-	</div>
-	<div class="row">
-		<div class="col cols-1">cols-1</div>
-		<div class="col cols-6  offset-5">cols-6  offset-5</div>
-	</div>
-	<div class="row">
-		<div class="col cols-1">cols-1</div>
-		<div class="col cols-5  offset-6">cols-5  offset-6</div>
-	</div>
-
-	<h1>Prepend</h1>
-	<div class="row">
-		<div class="col cols-10  prepend-1">cols-10  prepend-1</div>
-		<div class="col cols-1">cols-1</div>
-	</div>
-	<div class="row">
-		<div class="col cols-9  prepend-2">cols-9  prepend-2</div>
-		<div class="col cols-1">cols-1</div>
-	</div>
-	<div class="row">
-		<div class="col cols-8  prepend-3">cols-8  prepend-3</div>
-		<div class="col cols-1">cols-1</div>
-	</div>
-	<div class="row">
-		<div class="col cols-7  prepend-4">cols-7  prepend-4</div>
-		<div class="col cols-1">cols-1</div>
-	</div>
-	<div class="row">
-		<div class="col cols-6  prepend-5">cols-6  prepend-5</div>
-		<div class="col cols-1">cols-1</div>
-	</div>
-	<div class="row">
-		<div class="col cols-5  prepend-6">cols-5  prepend-6</div>
-		<div class="col cols-1">cols-1</div>
 	</div>
 
 </div>

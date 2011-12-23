@@ -6,14 +6,8 @@
 $column-width: 60px;
 $gutter-width: 20px;
 $columns: 12;
-$grid-flexbox: true;
 
 @include column-classes();
-
-.container {
-	margin: 0 auto;
-	@include grid-width();
-}
 
 .container {
 	margin: 0 auto;
@@ -25,7 +19,7 @@ $grid-flexbox: true;
 }
 
 
-#nested-example-1 {
+#nested-row-1 {
 	@include row();
 	.col {
 		@include column(6);
@@ -33,13 +27,12 @@ $grid-flexbox: true;
 			@include row(6);
 			.col {
 				@include column(3,6);
-				background-color: #999;
 			}
 		}
 	}
 }
 
-#nested-example-2 {
+#nested-row-2 {
 	@include row();
 	.column1 {
 		@include column(4);
@@ -47,7 +40,6 @@ $grid-flexbox: true;
 			@include row(4);
 			.col {
 				@include column(2,4);
-				background-color: #999;
 			}
 		}
 	}
@@ -57,15 +49,14 @@ $grid-flexbox: true;
 			@include row(8);
 			.col {
 				@include column(4,8);
-				background-color: #999;
 				.row {
 					@include row(4);
 					.col {
 						@include column(2,4);
-						background-color: #666;
 					}
 				}
 			}
 		}
 	}
 }
+
