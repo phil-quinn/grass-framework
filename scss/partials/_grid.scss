@@ -2,6 +2,7 @@
 $column-width: 60px !default;
 $gutter-width: 20px !default;
 $columns: 12 !default;
+$grid-flexbox: true !default;
 $grid-debug: false !default;
 
 /* The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/  */
@@ -23,10 +24,16 @@ $grid-debug: false !default;
 //////////*/
 
 @mixin grid-width() {
-	width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
+	$width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
+	width: $width;
 	html.flexbox & {
 		width: auto;
-		max-width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
+		max-width: $width;
+	}
+	@if $grid-debug {
+		@debug "GRID-WIDTH";
+		@debug "columns: #{$columns}";
+		@debug "width: #{$width}";
 	}
 }
 
@@ -48,12 +55,18 @@ $grid-debug: false !default;
 	display: inline-block;
 	width: $width;
 
-	/* only for when we have flexbox */
-	html.flexbox & {
-		width: auto;
-		@include display-box;
-		@include box-orient(horizontal);
-		@include box-align(stretch);
+	/* only for when we have flexbox and $grid-flexbox is true */
+	@if $grid-flexbox {
+		html.flexbox & {
+			width: auto;
+			@include display-box;
+			@include box-orient(horizontal);
+			@include box-align(stretch);
+		}
+	}
+	@else {
+		/* turn off any previous flexbox stuff */
+		display: inline-block;
 	}
 
 	@if $grid-debug {
@@ -81,10 +94,16 @@ $grid-debug: false !default;
 
 
 	/* only for when we have flexbox */
-	html.flexbox & {
-		display: block;
-		float: none;
-		@include box-flex($x * $row_columns);
+	@if $grid-flexbox {
+		html.flexbox & {
+			display: block;
+			float: none;
+			@include box-flex($x * $row_columns);
+		}
+	}
+	@else {
+		display: inline;
+		float: left;
 	}
 
 	@if $grid-debug {
@@ -115,3 +134,17 @@ $grid-debug: false !default;
 	}
 }
 
+@mixin column-classes($columns:$columns) {
+
+	@for $i from 1 through $columns {
+		.cols-#{$i} { @include column( $i ); }
+	}
+
+	@for $i from 1 through $columns {
+		.offset-#{$i} { @include offset( $i ); }
+	}
+
+	@for $i from 1 through $columns {
+		.prepend-#{$i} { @include prepend( $i ); }
+	}
+}

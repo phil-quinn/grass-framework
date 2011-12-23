@@ -2,70 +2,19 @@
 @import "compass/css3";
 @import "blueprint/typography";
 @import "blueprint/scaffolding";
-@import "partials/grid";
-@import "partials/cols";
 
 body {
-	margin: 10px auto;
+	margin: 0 auto;
+	padding: 10px;
 	@include blueprint-typography-body(12px);
 	@include blueprint-typography-defaults;
-}
+	#{headings(all)} { margin-top: 1em; }
 
-.container {
-	margin: 0 auto;
-	@include grid-width();
-}
-
-.col {
-	background-color: #ccc;
-	margin-top: 10px;
-}
-
-.row {
-	@include row();
-}
-
-#nested-example-1 {
-	@include row();
 	.col {
-		@include column(6);
-		.row {
-			@include row(6);
-			.col {
-				@include column(3,6);
-				background-color: #999;
-			}
-		}
+		background-color: #ccc;
+		margin-top: 10px;
 	}
 }
 
-#nested-example-2 {
-	@include row();
-	.column1 {
-		@include column(4);
-		.row {
-			@include row(4);
-			.col {
-				@include column(2,4);
-				background-color: #999;
-			}
-		}
-	}
-	.column2 {
-		@include column(8);
-		.row {
-			@include row(8);
-			.col {
-				@include column(4,8);
-				background-color: #999;
-				.row {
-					@include row(4);
-					.col {
-						@include column(2,4);
-						background-color: #666;
-					}
-				}
-			}
-		}
-	}
-}
+
+
