@@ -11,8 +11,17 @@ body {
 	#{headings(all)} { margin-top: 1em; }
 
 	.col {
-		background-color: #ccc;
+		background-color: #ddd;
 		margin-top: 10px;
+		.col {
+			background-color: #ccc;
+			.col {
+				background-color: #bbb;
+				.col {
+					background-color: #aaa;
+				}
+			}
+		}
 	}
 }
 

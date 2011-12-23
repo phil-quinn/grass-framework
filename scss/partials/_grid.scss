@@ -2,7 +2,6 @@
 $column-width: 60px !default;
 $gutter-width: 20px !default;
 $columns: 12 !default;
-$grid-flexbox: true !default;
 $grid-debug: false !default;
 
 /* The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/  */
@@ -52,18 +51,12 @@ $grid-debug: false !default;
 		display: inline-block;
 		width: $width;
 
-		/* only for when we have flexbox and $grid-flexbox is true */
-		@if $grid-flexbox {
-			html.flexbox & {
-				width: 100%;
-				@include display-box;
-				@include box-orient(horizontal);
-				@include box-align(stretch);
-			}
-		}
-		@else {
-			/* turn off any previous flexbox stuff */
-			display: inline-block;
+		/* only for when we have js */
+		html.js & {
+			width: 100%;
+			@include display-box;
+			@include box-orient(horizontal);
+			@include box-align(stretch);
 		}
 	}
 
@@ -99,17 +92,11 @@ $grid-debug: false !default;
 		float: left;
 
 
-		/* only for when we have flexbox */
-		@if $grid-flexbox {
-			html.flexbox & {
-				display: block;
-				float: none;
-				@include box-flex($x * $row_columns);
-			}
-		}
-		@else {
-			display: inline;
-			float: left;
+		/* only for when we have js */
+		html.js & {
+			display: block;
+			float: none;
+			@include box-flex($x * $row_columns);
 		}
 	}
 	@if $grid-debug {
