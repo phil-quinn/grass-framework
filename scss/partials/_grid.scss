@@ -27,8 +27,7 @@ $grid-debug: false !default;
 	$width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
 	width: $width;
 	html.flexbox & {
-		width: auto;
-		max-width: $width;
+		width: 100%;
 	}
 	@if $grid-debug {
 		@debug "GRID-WIDTH";
@@ -39,41 +38,38 @@ $grid-debug: false !default;
 
 @mixin row($x:$columns) {
 
-	/* the visual width of the row */
-	$row_width: ($column-width * $x) + (($x - 1) * $gutter-width);
-
-	/* the row_width + the margins */
-	$width: $row_width + $gutter-width;
-
-	/* the margins on the outside */
-	$margin: $gutter-width / 2 * -1;
-
-	margin-left: $margin;
-	margin-right: $margin;
-
-	/* default, no flexbox styles */
-	display: inline-block;
-	width: $width;
-
-	/* only for when we have flexbox and $grid-flexbox is true */
-	@if $grid-flexbox {
-		html.flexbox & {
-			width: auto;
-			@include display-box;
-			@include box-orient(horizontal);
-			@include box-align(stretch);
-		}
+	/* if we are passed 0, set to 100% wide */
+	@if $x == 0 {
+		display: block;
+		width: 100%;
 	}
 	@else {
-		/* turn off any previous flexbox stuff */
+
+		/* the visual width of the row */
+		$width: ($column-width * $x) + (($x - 1) * $gutter-width);
+
+		/* default, no flexbox styles */
 		display: inline-block;
+		width: $width;
+
+		/* only for when we have flexbox and $grid-flexbox is true */
+		@if $grid-flexbox {
+			html.flexbox & {
+				width: 100%;
+				@include display-box;
+				@include box-orient(horizontal);
+				@include box-align(stretch);
+			}
+		}
+		@else {
+			/* turn off any previous flexbox stuff */
+			display: inline-block;
+		}
 	}
 
 	@if $grid-debug {
 		@debug "ROW";
-		@debug "row_width: #{$row_width}";
 		@debug "width: #{$width}";
-		@debug "margin: #{$margin}";
 	}
 
 }
@@ -81,31 +77,41 @@ $grid-debug: false !default;
 
 @mixin column($x, $row_columns:$columns) {
 
-	$width: ($x * $column-width) + (($x - 1) * $gutter-width);
-	$margin: $gutter-width/2;
-
-	width: $width;
-	margin-left: $margin;
-	margin-right: $margin;
-
-	/* default, no flexbox styles */
-	display: inline;
-	float: left;
-
-
-	/* only for when we have flexbox */
-	@if $grid-flexbox {
-		html.flexbox & {
-			display: block;
-			float: none;
-			@include box-flex($x * $row_columns);
-		}
+	/* if we are passed 0, set to 100% wide */
+	@if $x == 0 {
+		display: block;
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
 	}
 	@else {
+
+		$width: ($x * $column-width) + (($x - 1) * $gutter-width);
+		$margin: $gutter-width;
+
+		width: $width;
+		margin-left: $margin;
+
+		&:first-child { margin-left: 0; }
+
+		/* default, no flexbox styles */
 		display: inline;
 		float: left;
-	}
 
+
+		/* only for when we have flexbox */
+		@if $grid-flexbox {
+			html.flexbox & {
+				display: block;
+				float: none;
+				@include box-flex($x * $row_columns);
+			}
+		}
+		@else {
+			display: inline;
+			float: left;
+		}
+	}
 	@if $grid-debug {
 		@debug "COLUMN";
 		@debug "width: #{$width}";
@@ -114,37 +120,10 @@ $grid-debug: false !default;
 
 }
 
-@mixin offset($x:1, $row_columns:$columns) {
-
-	$margin: ($x * $column-width) + (($x + .5) * $gutter-width);
-	margin-left: $margin;
-	@if $grid-debug {
-		@debug "OFFSET";
-		@debug "margin-left: #{$margin}";
-	}
-}
-
-@mixin prepend($x:1, $row_columns:$columns) {
-
-	$margin: ($x * $column-width) + (($x + .5) * $gutter-width);
-	margin-right: $margin;
-	@if $grid-debug {
-		@debug "PREPEND";
-		@debug "margin-right: #{$margin}";
-	}
-}
-
 @mixin column-classes($columns:$columns) {
 
 	@for $i from 1 through $columns {
 		.cols-#{$i} { @include column( $i ); }
 	}
 
-	@for $i from 1 through $columns {
-		.offset-#{$i} { @include offset( $i ); }
-	}
-
-	@for $i from 1 through $columns {
-		.prepend-#{$i} { @include prepend( $i ); }
-	}
 }
