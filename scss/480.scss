@@ -20,7 +20,6 @@ $grid-flexbox: true;
 			@include row(4);
 			.col {
 				@include column(2,4);
-				background-color: #999;
 			}
 		}
 	}
@@ -32,7 +31,6 @@ $grid-flexbox: true;
 			@include row();
 			.col {
 				@include column(2,4);
-				background-color: #999;
 			}
 		}
 	}
@@ -41,12 +39,10 @@ $grid-flexbox: true;
 			@include row();
 			.col {
 				@include column(2,4);
-				background-color: #999;
 				.row {
 					@include row(0);
 					.col {
 						@include column(0);
-						background-color: #666;
 					}
 				}
 			}
