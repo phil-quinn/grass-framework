@@ -25,10 +25,19 @@
 	<link rel="stylesheet" media="" href="$ThemedCSSLink(ie)">
 	<![endif]-->
 
-
+	<!-- we need modernizr to detect if we can use flexbox -->
 	<script src="javascript/modernizr-2.0.6.min.js"></script>
+
+	<!-- we need jquery for selectivizr (and becuse it's cool) -->
 	<script src="javascript/jquery-1.7.1.min.js"></script>
-	<script src="javascript/selectivizr-min.js"></script>
+
+	<!-- selectivizr lets old IEs work better with css psuedo classes like first-child -->
+
+	<!--[if (gte IE 6)&(lte IE 8)]>
+		<script src="javascript/selectivizr-min.js"></script>
+	<![endif]-->
+
+	<!-- flexie is a JS shim to give support for flexbox to non-flexbox friendly browsers -->
 	<script src="javascript/flexie.min.js"></script>
 </head>
 <body>
