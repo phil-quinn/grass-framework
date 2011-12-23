@@ -19,7 +19,7 @@ $columns: 12;
 }
 
 
-#nested-example-1 {
+#nested-row-1 {
 	@include row();
 	.col {
 		@include column(6);
@@ -32,7 +32,7 @@ $columns: 12;
 	}
 }
 
-#nested-example-2 {
+#nested-row-2 {
 	@include row();
 	.column1 {
 		@include column(4);

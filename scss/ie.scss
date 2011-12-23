@@ -1,13 +1,11 @@
-/* just for IE lte 9 */
+/* just for IE lt 9 */
 
 @import "compass/css3";
 @import "partials/grid";
 
 
-/* bring in all the other styles up to 950, besides screen */
+/* bring in all the other styles up to 992, besides screen */
 @import "480";
 @import "600";
 @import "768";
 @import "992";
-@import "1024";
-@import "1382";
