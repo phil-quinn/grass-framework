@@ -6,7 +6,6 @@
 $column-width: 45px;
 $gutter-width: 20px;
 $columns: 12;
-$grid-flexbox: true;
 
 @include column-classes();
 

@@ -6,18 +6,12 @@
 $column-width: 60px;
 $gutter-width: 20px;
 $columns: 12;
-$grid-flexbox: true;
 
 @include column-classes();
 
 .container {
 	margin: 0 auto;
-	@include grid-width();
-}
-
-.container {
-	margin: 0 auto;
-	@include grid-width();
+	@include grid-width(true);
 }
 
 .row {

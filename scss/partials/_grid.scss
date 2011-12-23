@@ -1,32 +1,33 @@
-// Defaults which you can freely override
+@import "compass/utilities/general/clearfix";
+
+/* Defaults which you can freely override */
 $column-width: 60px !default;
 $gutter-width: 20px !default;
 $columns: 12 !default;
 $grid-debug: false !default;
 
-/* The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/  */
-@mixin clearfix() {
-	*zoom:1;
+/* compass box flex defaults */
+/* box-align: start | end | center | baseline | stretch */
+$default-box-align: stretch;
+/* box-orient: horizontal | vertical | inline-axis | block-axis | inherit */
+$default-box-orient: horizontal;
 
-	&:before,
-	&:after {
-	    content:"";
-	    display:table;
-	}
-	&:after {
-	    clear:both;
-	}
-}
 
 /*//////////
 // GRID //
 //////////*/
 
-@mixin grid-width() {
+@mixin grid-width($max:false) {
 	$width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
 	width: $width;
 	html.flexbox & {
 		width: 100%;
+		@if $max == true {
+			max-width: $width;
+		}
+		@elseif $max {
+			max-width: $max;
+		}
 	}
 	@if $grid-debug {
 		@debug "GRID-WIDTH";
@@ -37,26 +38,19 @@ $grid-debug: false !default;
 
 @mixin row($x:$columns) {
 
-	/* if we are passed 0, set to 100% wide */
-	@if $x == 0 {
-		display: block;
-		width: 100%;
-	}
-	@else {
+	width: 100%;
+	display: block;
+	@include pie-clearfix();
 
-		/* the visual width of the row */
-		$width: ($column-width * $x) + (($x - 1) * $gutter-width);
-
-		/* default, no flexbox styles */
-		display: inline-block;
-		width: $width;
+	/* if we are passed 0, NO flexbox  */
+	@if $x != 0 {
 
 		/* only for when we have flexbox */
 		html.flexbox & {
-			width: 100%;
+
 			@include display-box;
-			@include box-orient(horizontal);
-			@include box-align(stretch);
+			@include box-orient();
+			@include box-align();
 		}
 	}
 
