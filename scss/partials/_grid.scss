@@ -40,6 +40,7 @@ $default-box-orient: horizontal;
 
 	width: 100%;
 	display: block;
+
 	@include pie-clearfix();
 
 	/* if we are passed 0, NO flexbox  */
@@ -78,8 +79,8 @@ $default-box-orient: horizontal;
 
 		width: $width;
 		margin-left: $margin;
-
 		&:first-child { margin-left: 0; }
+
 
 		/* default, no flexbox styles */
 		display: inline;
