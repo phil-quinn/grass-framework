@@ -38,7 +38,8 @@ $default-box-orient: horizontal;
 
 @mixin row($x:$columns) {
 
-	width: 100%;
+	width: auto;
+	margin-left: -1 * $gutter-width;
 	display: block;
 
 	@include pie-clearfix();
@@ -48,7 +49,8 @@ $default-box-orient: horizontal;
 
 		/* only for when we have flexbox */
 		html.flexbox & {
-
+			width: 100%;
+			margin-left: 0;
 			@include display-box;
 			@include box-orient();
 			@include box-align();
@@ -79,7 +81,6 @@ $default-box-orient: horizontal;
 
 		width: $width;
 		margin-left: $margin;
-		&:first-child { margin-left: 0; }
 
 
 		/* default, no flexbox styles */
@@ -91,6 +92,7 @@ $default-box-orient: horizontal;
 		html.flexbox & {
 			display: block;
 			float: none;
+			&:first-child { margin-left: 0; }
 			@include box-flex($x * $row_columns);
 		}
 	}
