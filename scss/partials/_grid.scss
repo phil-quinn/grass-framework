@@ -4,7 +4,9 @@
 $column-width: 60px !default;
 $gutter-width: 20px !default;
 $columns: 12 !default;
+$use-flexbox: true !default; /* use flexbox if avaiable */
 $grid-debug: false !default;
+
 
 /* compass box flex defaults */
 /* box-align: start | end | center | baseline | stretch */
@@ -20,13 +22,15 @@ $default-box-orient: horizontal;
 @mixin grid-width($max:false) {
 	$width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
 	width: $width;
-	html.flexbox & {
-		width: 100%;
-		@if $max == true {
-			max-width: $width;
-		}
-		@elseif $max {
-			max-width: $max;
+	@if $use-flexbox {
+		html.flexbox & {
+			width: 100%;
+			@if $max == true {
+				max-width: $width;
+			}
+			@elseif $max {
+				max-width: $max;
+			}
 		}
 	}
 	@if $grid-debug {
@@ -39,14 +43,19 @@ $default-box-orient: horizontal;
 @mixin row($x:$columns) {
 
 	width: auto;
-	margin-left: -1 * $gutter-width;
+
+	/* use a negative margin for gutters, unless we've been passed 0 turning off rowness */
+	@if $x > 0 {
+		margin-left: -1 * $gutter-width;
+	}
+	@else {
+		margin-left: 0;
+	}
 	display: block;
 
 	@include pie-clearfix();
 
-	/* if we are passed 0, NO flexbox  */
-	@if $x != 0 {
-
+	@if $use-flexbox {
 		/* only for when we have flexbox */
 		html.flexbox & {
 			width: 100%;
@@ -88,12 +97,14 @@ $default-box-orient: horizontal;
 		float: left;
 
 
-		/* only for when we have flexbox */
-		html.flexbox & {
-			display: block;
-			float: none;
-			&:first-child { margin-left: 0; }
-			@include box-flex($x * $row_columns);
+		@if $use-flexbox {
+			/* only for when we have flexbox */
+			html.flexbox & {
+				display: block;
+				float: none;
+				&:first-child { margin-left: 0; }
+				@include box-flex($x * $row_columns);
+			}
 		}
 	}
 	@if $grid-debug {

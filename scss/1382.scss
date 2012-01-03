@@ -7,47 +7,51 @@ $column-width: 95px;
 $gutter-width: 20px;
 $columns: 12;
 
-@include column-classes();
-
 .container {
 	margin: 0 auto;
 	@include grid-width(true);
 }
 
-.row {
-	@include row();
-}
-
 #nested-columns {
 	@include row();
-	.col {
-		@include column(6);
-
+	#nested-column-1 {
+		@include column(4,12);
 		#nested-row-1 {
-			@include row();
+			@include row(4);
 			.col {
-				@include column(3,6);
+				@include column(2);
 				.row {
-					@include row();
+					@include row(2);
 					.col {
-						@include column(1.5,3);
+						@include column(1,2);
 					}
 				}
 			}
 		}
+	}
 
+	#nested-column-2 {
+		@include column(8,12);
 		#nested-row-2 {
-			@include row();
-			.col {
-				@include column(3,6);
+			.column1 {
+				@include column(0);
 				.row {
 					@include row();
 					.col {
-						@include column(1.5,3);
+						@include column(4,8);
+					}
+				}
+			}
+			.column2 {
+				@include column(0);
+				.row {
+					@include row();
+					.col {
+						@include column(4,8);
 						.row {
-							@include row(0);
+							@include row(4);
 							.col {
-								@include column(0);
+								@include column(2,4);
 							}
 						}
 					}
@@ -55,4 +59,11 @@ $columns: 12;
 			}
 		}
 	}
+}
+
+#normal-columns {
+	.row {
+		@include row();
+	}
+	@include column-classes();
 }

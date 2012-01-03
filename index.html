@@ -31,16 +31,11 @@
 	<!-- we need jquery for selectivizr (and becuse it's cool) -->
 	<script src="javascript/jquery-1.7.1.min.js"></script>
 
-	<!-- selectivizr lets old IEs work better with css psuedo classes like first-child -->
-	<!--[if (gte IE 6)&(lte IE 9)]>
-		<script src="javascript/selectivizr-min.js"></script>
-	<![endif]-->
-
 </head>
 <body>
 <div class="container">
 	<div id="nested-columns">
-		<div class="col">
+		<div class="col" id="nested-column-1">
 			<h1>Nested Example 1</h1>
 			<div class="row" id="nested-row-1">
 				<div class="col">
@@ -59,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col">
+		<div class="col" id="nested-column-2">
 			<h1>Nested Example 2</h1>
 			<div class="row" id="nested-row-2">
 				<div class="col column1">

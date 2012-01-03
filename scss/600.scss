@@ -6,43 +6,51 @@
 $column-width: 60px;
 $gutter-width: 20px;
 $columns: 8;
-$grid-flexbox: true;
 
 .container {
 	margin: 0 auto;
 	@include grid-width();
 }
 
-
-#nested-row-1 {
+#nested-columns {
+	@include row();
 	.col {
-		.row {
-			@include row(4);
-			.col {
-				@include column(2,4);
+		@include column(4,8);
+	}
+	#nested-row-1 {
+		@include row(0);
+		.col {
+			@include column(0);
+			.row {
+				@include row(4);
+				.col {
+					@include column(2,4);
+				}
 			}
 		}
 	}
-}
 
-#nested-row-2 {
-	.column1 {
-		.row {
-			@include row();
-			.col {
-				@include column(2,4);
+	#nested-row-2 {
+		.column1 {
+			@include column(0);
+			.row {
+				@include row();
+				.col {
+					@include column(2,4);
+				}
 			}
 		}
-	}
-	.column2 {
-		.row {
-			@include row();
-			.col {
-				@include column(2,4);
-				.row {
-					@include row(0);
-					.col {
-						@include column(0);
+		.column2 {
+			@include column(0);
+			.row {
+				@include row();
+				.col {
+					@include column(2,4);
+					.row {
+						@include row(0);
+						.col {
+							@include column(0);
+						}
 					}
 				}
 			}

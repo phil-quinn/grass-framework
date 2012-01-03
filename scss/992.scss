@@ -7,52 +7,53 @@ $column-width: 60px;
 $gutter-width: 20px;
 $columns: 12;
 
-@include column-classes();
-
 .container {
 	margin: 0 auto;
 	@include grid-width();
 }
 
-.row {
+#nested-columns {
 	@include row();
-}
-
-
-#nested-row-1 {
-	@include row();
-	.col {
-		@include column(6);
-		.row {
-			@include row(6);
-			.col {
-				@include column(3,6);
-			}
-		}
-	}
-}
-
-#nested-row-2 {
-	@include row();
-	.column1 {
-		@include column(4);
-		.row {
+	#nested-column-1 {
+		@include column(4,12);
+		#nested-row-1 {
 			@include row(4);
 			.col {
-				@include column(2,4);
+				@include column(2);
+				.row {
+					@include row(2);
+					.col {
+						@include column(1,2);
+					}
+				}
 			}
 		}
 	}
-	.column2 {
-		@include column(8);
-		.row {
-			@include row(8);
-			.col {
-				@include column(4,8);
+
+	#nested-column-2 {
+		@include column(8,12);
+		#nested-row-2 {
+			.column1 {
+				@include column(0);
 				.row {
-					@include row(4);
+					@include row();
 					.col {
-						@include column(2,4);
+						@include column(4,8);
+					}
+				}
+			}
+			.column2 {
+				@include column(0);
+				.row {
+					@include row();
+					.col {
+						@include column(4,8);
+						.row {
+							@include row(4);
+							.col {
+								@include column(2,4);
+							}
+						}
 					}
 				}
 			}
@@ -60,3 +61,9 @@ $columns: 12;
 	}
 }
 
+#normal-columns {
+	.row {
+		@include row();
+	}
+	@include column-classes();
+}

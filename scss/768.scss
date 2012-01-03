@@ -7,55 +7,61 @@ $column-width: 45px;
 $gutter-width: 20px;
 $columns: 12;
 
-@include column-classes();
 
 .container {
 	margin: 0 auto;
 	@include grid-width();
 }
 
-.row {
-	@include row();
-}
-
-
-#nested-row-1 {
+#nested-columns {
 	@include row();
 	.col {
-		@include column(6);
-		.row {
-			@include row(6);
-			.col {
-				@include column(3,6);
+		@include column(6,12);
+	}
+	#nested-row-1 {
+		@include row(0);
+		.col {
+			@include column(0);
+			.row {
+				@include row(6);
+				.col {
+					@include column(3,6);
+				}
 			}
 		}
 	}
-}
 
-#nested-row-2 {
-	@include row();
-	.column1 {
-		@include column(4);
-		.row {
-			@include row(4);
-			.col {
-				@include column(2,4);
+	#nested-row-2 {
+		.column1 {
+			@include column(0);
+			.row {
+				@include row();
+				.col {
+					@include column(3,6);
+				}
 			}
 		}
-	}
-	.column2 {
-		@include column(8);
-		.row {
-			@include row(8);
-			.col {
-				@include column(4,8);
-				.row {
-					@include row(4);
-					.col {
-						@include column(2,4);
+		.column2 {
+			@include column(0);
+			.row {
+				@include row();
+				.col {
+					@include column(3,6);
+					.row {
+						@include row(0);
+						.col {
+							@include column(0);
+						}
 					}
 				}
 			}
 		}
 	}
+}
+
+#normal-columns {
+	.row {
+		@include row();
+	}
+	@include column-classes();
 }
