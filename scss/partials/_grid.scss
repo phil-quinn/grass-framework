@@ -55,7 +55,7 @@ $default-box-orient: horizontal;
 
 	@include pie-clearfix();
 
-	@if $use-flexbox {
+	@if $use-flexbox and $x > 0 {
 		/* only for when we have flexbox */
 		html.flexbox & {
 			width: 100%;
@@ -97,7 +97,7 @@ $default-box-orient: horizontal;
 		float: left;
 
 
-		@if $use-flexbox {
+		@if $use-flexbox and $x > 0 {
 			/* only for when we have flexbox */
 			html.flexbox & {
 				display: block;

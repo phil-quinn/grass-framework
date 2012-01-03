@@ -35,7 +35,7 @@ $columns: 12;
 		.column1 {
 			@include column(0);
 			.row {
-				@include row();
+				@include row(6);
 				.col {
 					@include column(3,6);
 				}
@@ -44,7 +44,7 @@ $columns: 12;
 		.column2 {
 			@include column(0);
 			.row {
-				@include row();
+				@include row(6);
 				.col {
 					@include column(3,6);
 					.row {

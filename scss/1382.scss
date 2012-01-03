@@ -33,25 +33,27 @@ $columns: 12;
 	#nested-column-2 {
 		@include column(8,12);
 		#nested-row-2 {
+			@include row(8);
+
 			.column1 {
-				@include column(0);
+				@include column(4,8);
 				.row {
-					@include row();
+					@include row(4);
 					.col {
-						@include column(4,8);
+						@include column(2,4);
 					}
 				}
 			}
 			.column2 {
-				@include column(0);
+				@include column(4,8);
 				.row {
-					@include row();
+					@include row(4);
 					.col {
-						@include column(4,8);
+						@include column(2,4);
 						.row {
-							@include row(4);
+							@include row(2);
 							.col {
-								@include column(2,4);
+								@include column(1,2);
 							}
 						}
 					}
