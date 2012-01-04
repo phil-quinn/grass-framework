@@ -13,15 +13,17 @@ $columns: 12;
 	@include grid-width();
 }
 
+@import "partials/intro_cols";
+
 #nested-columns {
 	@include row();
 	.col {
 		@include column(6,12);
 	}
 	#nested-row-1 {
-		@include row(0);
+		@include row(false);
 		.col {
-			@include column(0);
+			@include column(false);
 			.row {
 				@include row(6);
 				.col {
@@ -33,7 +35,7 @@ $columns: 12;
 
 	#nested-row-2 {
 		.column1 {
-			@include column(0);
+			@include column(false);
 			.row {
 				@include row(6);
 				.col {
@@ -42,15 +44,15 @@ $columns: 12;
 			}
 		}
 		.column2 {
-			@include column(0);
+			@include column(false);
 			.row {
 				@include row(6);
 				.col {
 					@include column(3,6);
 					.row {
-						@include row(0);
+						@include row(false);
 						.col {
-							@include column(0);
+							@include column(false);
 						}
 					}
 				}

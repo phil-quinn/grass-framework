@@ -39,9 +39,9 @@ $columns: 4;
 			.col {
 				@include column(2,4);
 				.row {
-					@include row(0);
+					@include row(false);
 					.col {
-						@include column(0);
+						@include column(false);
 					}
 				}
 			}

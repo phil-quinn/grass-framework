@@ -1,16 +1,18 @@
-/* 1382px */
+/* 992px */
 @import "compass/css3";
 @import "partials/grid";
 
 
-$column-width: 95px;
+$column-width: 60px;
 $gutter-width: 20px;
 $columns: 12;
 
 .container {
 	margin: 0 auto;
-	@include grid-width(true);
+	@include grid-width();
 }
+
+@import "partials/intro_cols";
 
 #nested-columns {
 	@include row();

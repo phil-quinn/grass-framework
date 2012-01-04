@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Flexgrid Test Page</title>
+	<title>Pragmatic Grid System</title>
 
 
 	<!-- For all browsers -->
@@ -30,14 +30,49 @@
 
 </head>
 <body>
-<div class="container">
-<h1>Welcome to the Pragmatic Grid</h1>
-<p>A pragmatic, flexible, liquid CSS grid system using Compass, SASS, and Modernizr</p>
+<div class="container" id="intro">
+	<div class="inner">
+		<h1>Welcome to the Pragmatic Grid System</h1>
+		<p>A pragmatic, flexible, liquid CSS grid system using <a href="http://compass-style.org/">Compass</a>, <a href="http://sass-lang.com/">SASS</a>, and <a href="http://www.modernizr.com/">Modernizr</a>.</p>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="inner">
+				<h2>Goals</h2>
+				<p>We needed a css grid framework to support our newer mobile-friendly projects. After reviewing a whole bunch of excellent solutions, we ended up creating our own.</p>
+				<p>The goal of this framework is to allow for flexible CSS grids that:</p>
+				<ul>
+					<li>Support the <a href="http://dev.w3.org/csswg/css3-flexbox/">CSS Flexible Box Layout Module</a> if available</li>
+					<li>Fall back to normal, static grid widths if not</li>
+					<li>Can choose NOT to use flexbox if desired</li>
+					<li>Support media queries for different grid layouts, if available</li>
+					<li>Support sub grids</li>
+					<li>Maintain consistent gutter widths, even in sub grids</li>
+					<li>Works with Compass and SASS, our CSS pre-processor of choice</li>
+					<li>Works with <a href="http://css3pie.com/">CSS3 PIE</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col">
+			<div class="inner">
+				<h2>Approach</h2>
+				<p>We realized that we only needed to support flexbox on modern browsers, but also needed a fall back for non-flexbox friendly browsers like IE. We also needed a solution that would display something more reasonable than the bare minimum to browers that don't support media queries.</p>
+				<p>Some of the decisions we made were:</p>
+				<ul>
+					<li>To build on the great work at <a href="http://www.stuffandnonsense.co.uk/projects/320andup/">320 and up</a> for media query support and basic mobile philosophy</li>
+					<li>To use a negative left margin apporach to the non-flexbox grid for better legacy browser and PIE support</li>
+					<li>To leverage Compass and SASS as much as possible</li>
+					<li>To compromise and usa a "row" function, so we could support better sub grids.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="container">
+<div class="container" id="samples">
+	<h2>Nested Grids</h2>
 	<div id="nested-columns">
 		<div class="col" id="nested-column-1">
-			<h2>Nested Example 1</h2>
+			<h3>Nested Example 1</h3>
 			<div class="row" id="nested-row-1">
 				<div class="col">
 					first column
@@ -56,7 +91,7 @@
 			</div>
 		</div>
 		<div class="col" id="nested-column-2">
-			<h2>Nested Example 2</h2>
+			<h3>Nested Example 2</h3>
 			<div class="row" id="nested-row-2">
 				<div class="col column1">
 					first column

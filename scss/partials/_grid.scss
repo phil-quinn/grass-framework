@@ -43,28 +43,28 @@ $default-box-orient: horizontal;
 @mixin row($x:$columns) {
 
 	width: auto;
-
-	/* use a negative margin for gutters, unless we've been passed 0 turning off rowness */
-	@if $x > 0 {
-		margin-left: -1 * $gutter-width;
-	}
-	@else {
-		margin-left: 0;
-	}
 	display: block;
 
-	@include pie-clearfix();
+	@if $x == false {
+		margin-left: 0;
+	}
+	@else {
+		/* use a negative margin for gutters, unless we've been passed false turning off rowness */
+		margin-left: -1 * $gutter-width;
+		@include pie-clearfix();
 
-	@if $use-flexbox and $x > 0 {
-		/* only for when we have flexbox */
-		html.flexbox & {
-			width: 100%;
-			margin-left: 0;
-			@include display-box;
-			@include box-orient();
-			@include box-align();
+		@if $use-flexbox {
+			/* only for when we have flexbox */
+			html.flexbox & {
+				width: 100%;
+				margin-left: 0;
+				@include display-box;
+				@include box-orient();
+				@include box-align();
+			}
 		}
 	}
+
 
 	@if $grid-debug {
 		@debug "ROW";
@@ -76,10 +76,10 @@ $default-box-orient: horizontal;
 
 @mixin column($x, $row_columns:$columns) {
 
-	/* if we are passed 0, set to 100% wide */
-	@if $x == 0 {
+	/* if we are passed false, turn off any column settings */
+	@if $x == false {
 		display: block;
-		width: 100%;
+		width: auto;
 		margin-left: 0;
 		margin-right: 0;
 	}
@@ -97,7 +97,7 @@ $default-box-orient: horizontal;
 		float: left;
 
 
-		@if $use-flexbox and $x > 0 {
+		@if $use-flexbox {
 			/* only for when we have flexbox */
 			html.flexbox & {
 				display: block;
