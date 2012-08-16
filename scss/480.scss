@@ -48,3 +48,18 @@ $columns: 4;
 		}
 	}
 }
+
+#fixed-width-sample {
+	.row {
+		@include row($columns);
+		.subnav {
+			@include column(1,4,true);
+		}
+		.center {
+			@include column(2,4);
+		}
+		.sidebar {
+			@include column(1,4,true);
+		}
+	}
+}

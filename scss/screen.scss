@@ -40,6 +40,12 @@ body {
 			}
 		}
 	}
+	#fixed-width-sample {
+		.subnav, .center, .sidebar {
+			background-color: #ccc;
+			text-align: center;
+		}
+	}
 }
 
 

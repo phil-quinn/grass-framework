@@ -19,11 +19,21 @@ $default-box-orient: horizontal;
 // GRID //
 //////////*/
 
-@mixin grid-width($max:false) {
+@mixin grid-width($max:false, $no-flexbox-only:false) {
 	$width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
 	width: $width;
-	@if $use-flexbox {
+
+	@if $no-flexbox-only {
 		html.flexbox & {
+			width: 100%;
+		}
+	}
+	@else if $use-flexbox {
+		/*
+			only for when we have flexbox
+			use flexboxlegacy class since we don't need all of flexbox's features
+		*/
+		html.flexboxlegacy & {
 			width: 100%;
 			@if $max == true {
 				max-width: $width;
@@ -44,6 +54,7 @@ $default-box-orient: horizontal;
 
 	width: auto;
 	display: block;
+	margin-right: 0;
 
 	@if $x == false {
 		margin-left: 0;
@@ -54,8 +65,11 @@ $default-box-orient: horizontal;
 		@include pie-clearfix();
 
 		@if $use-flexbox {
-			/* only for when we have flexbox */
-			html.flexbox & {
+			/*
+				only for when we have flexbox
+			   	use flexboxlegacy class since we don't need all of flexbox's features
+			*/
+			html.flexboxlegacy & {
 				width: 100%;
 				margin-left: 0;
 				@include display-box;
@@ -74,7 +88,7 @@ $default-box-orient: horizontal;
 }
 
 
-@mixin column($x, $row_columns:$columns) {
+@mixin column($x, $row_columns:$columns, $fixed:false) {
 
 	/* if we are passed false, turn off any column settings */
 	@if $x == false {
@@ -82,6 +96,10 @@ $default-box-orient: horizontal;
 		width: auto;
 		margin-left: 0;
 		margin-right: 0;
+	}
+	/* if we are passed 0, hide column */
+	@else if $x == 0 {
+			display: none;
 	}
 	@else {
 
@@ -98,12 +116,20 @@ $default-box-orient: horizontal;
 
 
 		@if $use-flexbox {
-			/* only for when we have flexbox */
-			html.flexbox & {
+			/*
+				only for when we have flexbox
+			   	use flexboxlegacy class since we don't need all of flexbox's features
+			*/
+			html.flexboxlegacy & {
 				display: block;
 				float: none;
 				&:first-child { margin-left: 0; }
-				@include box-flex($x * $row_columns);
+				@if $fixed  {
+					@include box-flex(0);
+				}
+				@else {
+					@include box-flex($x * $row_columns);
+				}
 			}
 		}
 	}
@@ -115,10 +141,10 @@ $default-box-orient: horizontal;
 
 }
 
-@mixin column-classes($columns:$columns) {
+@mixin column-classes($prefix:'cols',$columns:$columns,$row_columns:$columns) {
 
 	@for $i from 1 through $columns {
-		.cols-#{$i} { @include column( $i ); }
+		.#{$prefix}-#{$i} { @include column( $i, $row_columns); }
 	}
 
 }

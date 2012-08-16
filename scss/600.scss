@@ -59,3 +59,17 @@ $columns: 8;
 		}
 	}
 }
+#fixed-width-sample {
+	.row {
+		@include row($columns);
+		.subnav {
+			@include column(2,8,true);
+		}
+		.center {
+			@include column(4,8);
+		}
+		.sidebar {
+			@include column(2,8,true);
+		}
+	}
+}

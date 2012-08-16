@@ -71,3 +71,18 @@ $columns: 12;
 	}
 	@include column-classes();
 }
+
+#fixed-width-sample {
+	.row {
+		@include row($columns);
+		.subnav {
+			@include column(2,12,true);
+		}
+		.center {
+			@include column(7,12);
+		}
+		.sidebar {
+			@include column(3,12,true);
+		}
+	}
+}
