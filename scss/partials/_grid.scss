@@ -19,36 +19,29 @@ $default-box-orient: horizontal;
 // GRID //
 //////////*/
 
-@mixin grid-width($max:false, $no-flexbox-only:false) {
+@mixin grid-width($max-width:false) {
 	$width: ($column-width*$columns) + ($gutter-width*$columns) - $gutter-width;
 	width: $width;
 
-	@if $no-flexbox-only {
-		html.flexbox & {
-			width: 100%;
-		}
-	}
-	@else if $use-flexbox {
-		/*
-			only for when we have flexbox
-			use flexboxlegacy class since we don't need all of flexbox's features
-		*/
+	@if $use-flexbox {
 		html.flexboxlegacy & {
 			width: 100%;
-			@if $max == true {
+			@if $max-width == true {
 				max-width: $width;
 			}
-			@elseif $max {
-				max-width: $max;
+			@elseif $max-width {
+				max-width: $max-width;
 			}
 		}
 	}
+
 	@if $grid-debug {
 		@debug "GRID-WIDTH";
 		@debug "columns: #{$columns}";
 		@debug "width: #{$width}";
 	}
 }
+
 
 @mixin row($x:$columns) {
 
@@ -128,7 +121,7 @@ $default-box-orient: horizontal;
 					@include box-flex(0);
 				}
 				@else {
-					@include box-flex($x * $row_columns);
+					@include box-flex($x);
 				}
 			}
 		}

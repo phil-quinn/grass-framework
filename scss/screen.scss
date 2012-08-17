@@ -46,6 +46,10 @@ body {
 			text-align: center;
 		}
 	}
+
+	#docs {
+		#{headings(all)} { margin-left: 20px; }
+	}
 }
 
 
