@@ -9,9 +9,9 @@ javascripts_dir = "javascripts"
 relative_assets = true
 
 # use these for degugging
-# output_style = :nested
-# sass_options = {:debug_info => true}
+output_style = :nested
+sass_options = {:debug_info => true}
 
 # use these for production
-output_style = :compressed
-sass_options = {:debug_info => false}
+# output_style = :compressed
+# sass_options = {:debug_info => false}
