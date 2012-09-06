@@ -16,40 +16,40 @@ The goal of this framework is to allow for flexible CSS grids that:
 
 -   Support the [CSS Flexible Box Layout Module][] if available
 -   Fall back to normal, static grid widths if not
--   Can choose NOT to use flexbox if desired
+-   Can choose *not* to use flexbox if desired
 -   Support media queries for different grid layouts, if available
--   Support sub grids
--   Maintain consistent gutter widths, even in sub grids
--   Works with Compass and SASS, our CSS pre-processor of choice
--   Works with [CSS3 PIE][]
+-   Support subgrids
+-   Maintain consistent gutter widths, even in subgrids
+-   Work with Compass and SASS, our CSS preprocessor of choice
+-   Work with [CSS3 PIE][]
 
 
 Approach
 --------
 
-We realized that we only needed to support flexbox on modern browsers,
-but also needed a fall back for non-flexbox friendly browsers like IE.
+We realized that we not only needed to support flexbox on modern browsers,
+but also needed a fallback for non–flexbox-friendly browsers like IE.
 We also needed a solution that would display something more reasonable
-than the bare minimum to browers that don’t support media queries.
+than the bare minimum to browsers that don’t support media queries.
 
-Some of the decisions we made were:
+Some of the decisions we made were to:
 
--   To build on the great work at [320 and up][] for media query support
+-   build on the great work at [320 and up][] for media query support
     and basic mobile philosophy
--   To use a negative left margin apporach to the non-flexbox grid for
+-   use a negative left margin apporach to the non-flexbox grid for
     better legacy browser and PIE support
--   To leverage Compass and SASS as much as possible
--   To compromise and usa a “row” function, so we could support better
-    sub grids.
+-   leverage Compass and SASS as much as possible
+-   compromise and use a “row” function, so we could support better
+    subgrids.
 
 
 Getting started
 ---------------
 
-First off, you need to be using the [SASS][] CSS pre-processor. You
-will also need to use [Compass][], which is a collection of pre-made
-SASS mixins and helper functions. We’ll also be relying on
-[Modernizr][] to help us figure our what browsers can support what
+First, you need to use the [SASS][] CSS preprocessor. You
+also need to use [Compass][], which is a collection of pre-made
+SASS mixins and helper functions. We also rely on
+[Modernizr][] to help us figure out browser support for specific
 grid technologies.
 
 We’re going to assume you already know how to work with Modernizr,
@@ -60,19 +60,19 @@ with those packages first.
 Basic usage
 -----------
 
-Grass tries to use the flexible box model if it can. It relys on
+Grass tries to use the flexible box model if it can. It relies on
 Modernizr to decide if your page can support this. So you need to
 include Modernizr in your document’s head. And if Modernizr decides
 your browser can’t handle the flexible box model, or you have JS
-turned off, Grass falls back on a fixed width solution for your
+turned off, Grass falls back to a fixed-width
 grid.
 
-Let’s set up a simple, three column layout. Here’s the HTML we’re
+Let’s set up a simple, three-column layout. Here’s the HTML we’re
 going to add our grid to:
 
 	<html>
 		<head>
-			<title>Simple Three Column Example</title>
+			<title>Simple Three-Column Example</title>
 			<link rel="stylesheet" href="css/styles.css" />
 			<script src="javascript/modernizr-2.6.1.js"></script>
 		</head>
@@ -94,7 +94,7 @@ going to add our grid to:
 Let’s assume we’re making a new SASS/Compass stylesheet. We’ll call it
 `styles.scss`.
 
-Here's our imaginary file structure:
+Here’s our imaginary file structure:
 
 	example.html			<- our HTML page
 	config.rb 				<- SASS config file
@@ -107,41 +107,40 @@ Here's our imaginary file structure:
 			_grid.scss		<- Grass grid system
 		styles.scss			<- our custom styles
 
-First you would import Compass’ CSS3 module, and our
+First you would import Compass’s CSS3 module, and our
 `_grid.scss` partial into your SASS project, where you want to start
 using the grid framework.
 
 	@import "compass/css3";
 	@import "partials/grid";
 
-Compass’ `compass/css3` module makes sure that we have access to the
+Compass’s `compass/css3` module makes sure that we have access to the
 Compass mixins for the flexible box model.
 
-Grass’ `_grid.scss` is typically imported from your
+Grass’s `_grid.scss` is typically imported from your
 `partials` folder, usually as-is.
 
-Now you need to define your grid. Let's setup a basic 24 column grid, with 30px
-wide columns, and 10px of gutter between columns. That will give us a 950px wide
-page.
+Now you need to define your grid. Let‘s set up a basic 24 column grid,
+with 30px-wide columns, and 10px of gutter between columns.
+That will give us a 950px-wide page.
 
 	$column-width: 30px;
 	$gutter-width: 10px;
 	$columns: 24;
 
-If you don’t set these, Grass will use it’s own defaults:
+If you don’t set these, Grass will use its own defaults:
 
 	$column-width: 60px !default;
 	$gutter-width: 20px !default;
 	$columns: 12 !default;
 
-Now we can start applying the styling. One of the comprimises we have
-to deal with in order to have our system fall back to a static grid
-system if the flexible box model is not available, is that we have to
+Now we can start applying the styling.
+To accommodate browsers without the flexible box model, we have to
 set up a “row” div for our columns. In our case, we’ll use the `.row` div.
 
-Next we set up the columns. If the row that the columns are in spans all the grid
-system's columns (in our case 24) then you can just tell each column how many grid
-units wide it needs to be.
+Next we set up the columns.
+If the row containing the columns spans all the grid
+system’s columns (in our case 24) then you can just tell each column how many grid units wide it needs to be.
 
 	.row {
 		@include row();
@@ -160,16 +159,16 @@ units wide it needs to be.
 	}
 
 
-Ta da! We're done.
+Tada! We’re done.
 
 
 Nested Grids
 ------------
 
 Grass can nest grids inside other grids. And when we do this, it will keep
-the gutter widths consistent, even when it's flexible.
+the gutter widths consistent, even when it’s flexible.
 
-Here's a new HTML page:
+Here’s a new HTML page:
 
 	<html>
 		<head>
@@ -199,17 +198,17 @@ Here's a new HTML page:
 		</body>
 	</html>
 
-Let's assume we're using the same grid definitions as before. We can nest another
+Let’s assume we’re using the same grid definitions as before. We can nest another
 row inside our `.middle-column` div, and put two columns inside it. The only
 complication is that we need to pass in the number of columns that our parent
 row uses, so that Grass can calculate the widths and ratios correctly.
 This gets passed in as a second parameter to the `@column` mixin.
 
-So for a 6 unit column inside a 12 unit row, you would use this:
+So for a 6-unit column inside a 12-unit row, you would use this:
 
 	@import column(6,12);
 
-Here's the new, nested SCSS.
+Here’s the new, nested SCSS.
 
 	.row {
 		@include row();
@@ -245,9 +244,9 @@ Fixed Width Columns
 
 Sometimes you want one or more of your columns to stay a fixed width,
 while the other columns can stretch. You can do that by passing `true`
-as a third parameter to column include to tell it to not allow that
+as a third parameter to the column include to tell it not to allow that
 column to flex. This means you have to pass all three parameters, even
-if your row is full width.
+if your row is full-width.
 
 Using our first example, if we wanted the left and right columns to be
 fixed, we’d do this:
@@ -275,11 +274,11 @@ Responsive grids
 You can redefine the grid variables at any time, or even pass them
 through to the various functions. As long as you’re careful with the
 specificity of your selectors, you can redefine your grid to your
-heart’s content. Or demo page is an example of that.
+heart’s content. Our demo page is an example of that.
 
 Sometimes you will need to turn off column or row settings to change
-up your grid. You can do that by passing false to either the row or
-column includes.
+up your grid. You can do that by passing `false` to either the row or
+the column include.
 
 	@include row(false);
 	@include column(false);
@@ -290,7 +289,7 @@ Setting a max-width on a grid
 
 You may not want your grid to be stretchy forever. You can put a cap
 on it with the “grid-width” include. Typically, you apply this to a
-div that contains your whole page and it caps your page at the width
+div that contains your whole page, and it caps your page at the width
 of the current grid definitions.
 
 So for this HTML:
@@ -329,15 +328,16 @@ You could set the max-width of the page up like this:
 This would make the `.page-area` max out at the full grid width of
 950px.
 
-If you want to assign an arbitrary max-width, that’s different than
-the calculated one, you can. Although the fall-back non-flexbox
-version will still use the normal calculated grid system width.
+If you want to assign an arbitrary max-width that’s different from
+the calculated one, you can. The fall-back non-flexbox
+version will still use the normal calculated grid system width,
+however.
 
 	@include grid-width(1024px);
 
 If you don’t pass in `true` or a width, `grid-width` will set the
 width of the div to the calculated grid width for fallback browsers,
-but set it to `100%` for flexbox capable browsers.
+but set it to `100%` for flexbox-capable browsers.
 
 	@include grid-width();
 
@@ -348,7 +348,7 @@ Includes & Parameters
 Here is a  breakdown of the includes and parameters that come
 with Grass.
 
-### Grass defaults which you can override ###
+### Grass defaults that you can override ###
 
 	/* Grass defaults */
 	$column-width: 60px !default;	// single grid unit
@@ -378,7 +378,7 @@ with Grass.
 	@include row(false); 	// turn off row
 
 
-### @include row() ###
+### @include column() ###
 
 	@include column(3); 		// 3 unit column, full grid-width row
 	@include column(3,6);		// 3 unit column inside a 6 unit row
@@ -389,7 +389,7 @@ with Grass.
 
 This function builds a bunch of pre-made column classes, like more traditional
 grid systems. If you just call it without any parameters, it will produce a set
-if classes prefixed with `.cols-` for all the possible unit widths in your
+of classes prefixed with `.cols-` for all the possible unit widths in your
 grid settings.
 
 Example:
