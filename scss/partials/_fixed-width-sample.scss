@@ -1,0 +1,30 @@
+#fixed-width-sample {
+	.row {
+		@include respond-to(tablet) {
+			$columns: 8;
+			@include row($columns);
+			.subnav {
+				@include column(2,$columns,true);
+			}
+			.center {
+				@include column(4,$columns);
+			}
+			.sidebar {
+				@include column(2,$columns,true);
+			}
+		}
+		@include respond-to(desktop) {
+			$columns: 12;
+			@include row($columns);
+			.subnav {
+				@include column(2,$columns,true);
+			}
+			.center {
+				@include column(6,$columns);
+			}
+			.sidebar {
+				@include column(4,$columns,true);
+			}
+		}
+	}
+}

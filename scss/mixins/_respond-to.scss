@@ -1,0 +1,65 @@
+// respond to these sizes and up (or print)
+@mixin respond-to($names, $media-breakpoints:$media-breakpoints, $only:false) {
+
+	// loop through the names
+	@each $name in $names {
+
+		// first see if our name is 'print'
+		@if $name == 'print' {
+			@if $only {
+				@media only print { @content; }
+			}
+			@else {
+				@media print { @content; }
+			}
+		}
+		@else {
+			// otherwise loop through possible breakpoints, looking for a match
+			$i: 1; // count the iterations
+			@each $breakpoint in $media-breakpoints {
+
+				// we found a match
+				@if nth($breakpoint,1) == $name {
+
+					// if this is an 'only' situation,
+					@if $only {
+						// and we are not the last breakpoint
+						@if $only and $i < length($media-breakpoints) {
+							// this is the last item in the $media-breakpoints list
+							@media screen and (min-width: nth($breakpoint,2)) and (max-width: nth( nth($media-breakpoints,$i+1),2 )) { @content; }
+						}
+						@else {
+							// this is the last item in the $media-breakpoints list
+							@media screen and (min-width: nth($breakpoint,2)) { @content; }
+						}
+					}
+					@else {
+
+						// if we don't have a $responsive-threshold, this is responsive
+						@if $responsive-threshold == false {
+							@media screen and (min-width: nth($breakpoint,2)) { @content; }
+						}
+						// this width is less than or equal to the $responsive-threshold
+						@else if nth($breakpoint,2) <= $responsive-threshold { @content; }
+					}
+				}
+				$i: $i + 1;
+			}
+		}
+	}
+}
+
+// only respond to these sizes or print
+// ignores $responsive-threshold
+@mixin respond-only-to($names, $media-breakpoints:$media-breakpoints) {
+	@include respond-to($names, $media-breakpoints, 1) {
+		@content;
+	}
+}
+@mixin respond-to-retina() {
+	@media 	only screen and (-webkit-min-device-pixel-ratio: 1.5),
+			only screen and (-o-min-device-pixel-ratio: 3/2),
+			only screen and (min-device-pixel-ratio: 1.5) {
+				@content;
+			}
+}

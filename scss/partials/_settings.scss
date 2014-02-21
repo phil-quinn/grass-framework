@@ -1,0 +1,7 @@
+/* SET UP RESPONSIVE BREAK POINTS (DEFAULTS) ================================ */
+$media-breakpoints:
+	tablet 640px, // 8 cols
+	desktop 960px; // 12 cols
+
+/* set responsive-threshold to false by default */
+$responsive-threshold: false !default;

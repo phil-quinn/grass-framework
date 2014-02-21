@@ -1,13 +1,26 @@
-@import "compass/reset";
+// Include SASS CSS3
 @import "compass/css3";
-@import "blueprint/typography";
-@import "blueprint/scaffolding";
 
+// Bring in SASS normalize
+@import "third-party/normalize";
+
+// Bring in our settings
+@import "partials/settings";
+
+// Bring in our mixins
+@import "mixins/grid";
+@import "mixins/respond-to";
+
+// Page components
+@import "partials/intro";
+@import "partials/nested-columns";
+@import "partials/fixed-width-sample";
+@import "partials/columns-test";
+
+// Additional styles
 body {
 	margin: 0 auto;
 	padding: 10px;
-	@include blueprint-typography-body(12px);
-	@include blueprint-typography-defaults;
 	#{headings(all)} { margin: 1em 0 0 0; }
 	li {
 		margin-bottom: .5em;
@@ -19,6 +32,8 @@ body {
 		}
 	}
 	.container {
+		margin: 0 auto;
+		@include grid-width();
 		background-color: #fff;
 		overflow: hidden;
 	}

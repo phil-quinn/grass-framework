@@ -1,0 +1,20 @@
+#intro {
+	@include respond-to(tablet) {
+		$columns: 8;
+		.row {
+			@include row($columns);
+			.col {
+				@include column(4,$columns);
+			}
+		}
+	}
+	@include respond-to(desktop) {
+		$columns: 12;
+		.row {
+			@include row($columns);
+			.col {
+				@include column(6,$columns);
+			}
+		}
+	}
+}

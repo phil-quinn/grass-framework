@@ -1,8 +1,0 @@
-#intro {
-	.row {
-		@include row($columns);
-		.col {
-			@include column($columns / 2,$columns);
-		}
-	}
-}

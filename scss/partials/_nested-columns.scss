@@ -1,0 +1,26 @@
+#nested-row {
+	@include respond-to(tablet) {
+		$columns: 8;
+		.col {
+			.row {
+				@include row($columns);
+				.col {
+					@include column(4,4);
+				}
+			}
+		}
+	}
+	@include respond-to(desktop) {
+		$columns: 12;
+		@include row($columns);
+		.col {
+			@include column(6,$columns);
+			.row {
+				@include row(6);
+				.col {
+					@include column(3,6);
+				}
+			}
+		}
+	}
+}

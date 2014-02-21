@@ -43,13 +43,13 @@ $default-box-orient: horizontal;
 }
 
 
-@mixin row($x:$columns) {
+@mixin row($active:true) {
 
-	width: auto;
+	width: auto; $width: auto;
 	display: block;
 	margin-right: 0;
 
-	@if $x == false {
+	@if $active == false {
 		margin-left: 0;
 	}
 	@else {
@@ -63,7 +63,7 @@ $default-box-orient: horizontal;
 			   	use flexboxlegacy class since we don't need all of flexbox's features
 			*/
 			html.flexboxlegacy & {
-				width: 100%;
+				width: 100%; $width: 100%;
 				margin-left: 0;
 				@include display-box;
 				@include box-orient();
@@ -82,6 +82,9 @@ $default-box-orient: horizontal;
 
 
 @mixin column($x, $row_columns:$columns, $fixed:false) {
+
+	$width: unset;
+	$margin: unset;
 
 	/* if we are passed false, turn off any column settings */
 	@if $x == false {
